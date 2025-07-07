@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\News;
 use App\Models\User;
-use App\Models\UserTime;
 use App\Models\Position;
 use App\Models\Branch;
 use App\Models\Work_shift;
@@ -50,7 +49,7 @@ class UserController extends Controller
         }
 
         $user->birthday_th = $this->ChangeDateToTH($user->birthday);
-        ////////////////////// แปลงรูปแบบวันเกิดเป็น ไทย
+        //แปลงรูปแบบวันเกิดเป็น ไทย
 
         $user->position_name = Position::find($user->ref_position_id)->position_name;
         $data['page_url'] = 'admin/user';
@@ -61,7 +60,7 @@ class UserController extends Controller
     }
     public function ChangeDateToTH($date)
     {
-        ////////////////////// แปลงรูปแบบวันเกิดเป็น ไทย
+        // แปลงรูปแบบวันเกิดเป็น ไทย
         // สร้าง Carbon instance จากวันที่
         $m = date('m', strtotime($date));
         $date = Carbon::createFromFormat('Y-m-d', $date);
@@ -314,13 +313,4 @@ class UserController extends Controller
         //
     }
 }
-
-// $targetPath = $request->file('image_name')->getClientOriginalName();
-// $request->file('image_name')->move('upload/excel/', $targetPath);
-
-// $Reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-
-// $spreadSheet = $Reader->load('upload/excel/'.$targetPath);
-// $excelSheet = $spreadSheet->getActiveSheet();
-// return $spreadSheetAry = $excelSheet->toArray();
 

@@ -8,10 +8,7 @@ use App\Models\UserTime;
 use App\Models\Position;
 use App\Models\Branch;
 use App\Models\Work_shift;
-use App\Models\Schedule;
-use App\Models\Leave;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -140,7 +137,6 @@ class UserTimeController extends Controller
                         // แสดงผลลัพธ์
                         $duration->format('%H:%i');
                         
-                        ///////////////////////////////////////
                         $time1 = Carbon::createFromTimeString($duration->format('%H:%i'));
 
                         $time2 = Carbon::createFromTimeString($late);
@@ -165,7 +161,6 @@ class UserTimeController extends Controller
                         // แสดงผลลัพธ์
                         $duration->format('%H:%i');
                         
-                        ///////////////////////////////////////
                         $time1 = Carbon::createFromTimeString($duration->format('%H:%i'));
 
                         $time2 = Carbon::createFromTimeString($ot);
@@ -177,7 +172,6 @@ class UserTimeController extends Controller
                         $ot = $result->format('H:i');
                     }
 
-                    /////////// สาย
                     /////////// สาย
                     list($late_hour, $late_minute) = explode(':', $late);
                     $late_hour = ltrim($late_hour, '0');
@@ -192,9 +186,7 @@ class UserTimeController extends Controller
                         $ut->late = "$late_hour&nbsp; ชม. &nbsp;$late_minute&nbsp; นาที";
                     }
                     ////////// สาย จบแล้ว
-                    ////////// สาย จบแล้ว
                     
-                    ////////// โอที
                     ////////// โอที
                     list($ot_hour, $ot_minute) = explode(':', $ot);
                     $ot_hour = ltrim($ot_hour, '0');
@@ -209,8 +201,6 @@ class UserTimeController extends Controller
                         $ut->ot = "$ot_hour&nbsp; ชม. &nbsp;$ot_minute&nbsp; นาที";
                     }
                     ////////// โอที จบแล้ว
-                    ////////// โอที จบแล้ว
-
                 }
 
 
@@ -282,7 +272,6 @@ class UserTimeController extends Controller
                         // แสดงผลลัพธ์
                         $duration->format('%H:%i');
                         
-                        ///////////////////////////////////////
                         $time1 = Carbon::createFromTimeString($duration->format('%H:%i'));
 
                         $time2 = Carbon::createFromTimeString($late);
@@ -307,7 +296,6 @@ class UserTimeController extends Controller
                         // แสดงผลลัพธ์
                         $duration->format('%H:%i');
                         
-                        ///////////////////////////////////////
                         $time1 = Carbon::createFromTimeString($duration->format('%H:%i'));
 
                         $time2 = Carbon::createFromTimeString($ot);
@@ -321,7 +309,6 @@ class UserTimeController extends Controller
 
                 }
 
-                /////////// สาย
                 /////////// สาย
                 list($late_hour, $late_minute) = explode(':', $late);
                 $late_hour = ltrim($late_hour, '0');
@@ -339,9 +326,7 @@ class UserTimeController extends Controller
                     }
                 }
                 ////////// สาย จบแล้ว
-                ////////// สาย จบแล้ว
                 
-                ////////// โอที
                 ////////// โอที
                 list($ot_hour, $ot_minute) = explode(':', $ot);
                 $ot_hour = ltrim($ot_hour, '0');
@@ -356,9 +341,6 @@ class UserTimeController extends Controller
                     $re->ot = "$ot_hour&nbsp; ชม. &nbsp;$ot_minute&nbsp; นาที";
                 }
                 ////////// โอที จบแล้ว
-                ////////// โอที จบแล้ว
-
-
         }
         // return $results->items();
         // dd($results);
@@ -388,8 +370,6 @@ class UserTimeController extends Controller
         // return 987;
         try{
             $targetPath = rand().'_'.$request->file('file')->getClientOriginalName();
-            // $request->file('file')->move('upload/excel/', $targetPath);
-            // copy('upload/excel/'.$targetPath, 'upload/ttime_excel/'.$targetPath);
             $Reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
 
             $spreadSheet = $Reader->load('upload/excel/1823498963_time_test_srongpol.xlsx');
@@ -509,13 +489,3 @@ class UserTimeController extends Controller
      * @return \Illuminate\Http\Response
      */
 }
-
-// $targetPath = $request->file('image_name')->getClientOriginalName();
-// $request->file('image_name')->move('upload/time_excel/', $targetPath);
-
-// $Reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-
-// $spreadSheet = $Reader->load('upload/time_excel/'.$targetPath);
-// $excelSheet = $spreadSheet->getActiveSheet();
-// return $spreadSheetAry = $excelSheet->toArray();
-

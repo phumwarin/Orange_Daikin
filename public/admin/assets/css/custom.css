@@ -1,0 +1,21 @@
+.btn-primary {
+    background-color: #0096e0 !important;
+    border-color: #0096e0 !important;
+    color: #fff !important;
+}
+
+button[type="button"].btn-primary:hover,
+button[type="button"].btn-primary:focus {
+    background-color: #007fc2 !important;
+    border-color: #007fc2 !important;
+    color: #fff !important;
+}
+
+button[type="button"].btn-primary:active {
+    background-color: #0096e0 !important;
+    color: #fff !important;
+}
+
+.fa-floppy-disk {
+    font-size: 18px;
+}

@@ -6,7 +6,7 @@
 <meta name="description" content="" />
 <base href="{{ url('/') }}/">
 <!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="assets/img/illustrations/main.png" />
+<link rel="icon" type="image/x-icon" href="assets/img/illustrations/Daikin-Logo.png" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
 <link rel="stylesheet" href="assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
 <link rel="stylesheet" href="assets/css/demo.css" />
-
+<link rel="stylesheet" href="{{ asset('admin/assets/css/custom.css') }}">
 <!-- Vendors CSS -->
 <link rel="stylesheet" href="assets/vendor/libs/node-waves/node-waves.css" />
 <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />

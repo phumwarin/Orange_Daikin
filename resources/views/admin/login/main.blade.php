@@ -35,7 +35,7 @@
           <div class="col-12 mx-auto">
             <!-- Logo -->
             <div class="app-brand mb-4">
-              <img src="{{url('')}}/assets/img/illustrations/main.png" alt="" style="margin: auto;">
+              <img src="{{url('')}}/assets/img/illustrations/Daikin-Logo.png" alt="" style="margin: auto;">
             </div>
             <!-- /Logo -->
             <h3 class="mb-1">ยินดีต้อนรับ</h3>
@@ -134,7 +134,7 @@
                 email: email,
                 password: password
             }).then(res => {
-                location.href = '/admin/user'
+                location.href = '/admin/job'
             }).catch(err => {
                 $('#btn-login').html('Login')
                 if (err.response.data.message != 'Wrong email or password.') {
