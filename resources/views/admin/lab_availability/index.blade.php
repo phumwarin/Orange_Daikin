@@ -8,6 +8,7 @@
     <title>Lab Availability | Daikin</title>
 </head>
 <style>
+    /* Table Styling */
     .table th {
         text-transform: none;
         font-size: 13px;
@@ -32,10 +33,13 @@
         border-top: 1px solid #dee2e6;
         border-bottom: 1px solid #dee2e6;
     }
+
     .custom-table tr {
         border-left: 1px solid #dee2e6;
         border-right: 1px solid #dee2e6;
     }
+
+    /* Modal Header Decoration */
     .modalHeadDecor .modal-header {
         padding: 0;
     }
@@ -58,6 +62,7 @@
         border-right: 65px solid transparent;
     }
 
+    /* Job Card Layout */
     .container-create-job {
         padding: 16px 24px;
     }
@@ -65,6 +70,72 @@
     .job-text {
         align-self: center;
     }
+
+    /* Main Nav Tabs Styling (Card Level) */
+    .card .nav.nav-tabs {
+        padding: 0 14px;
+    }
+
+    .nav-tabs .nav-link.active {
+        position: relative;
+        color: #0096e0 !important;
+    }
+
+    .nav-tabs .nav-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #0096e0;
+    }
+
+    .nav-tabs .nav-link {
+        color: #0096e0;
+        transition: color 0.3s ease;
+        padding-bottom: 14px;
+    }
+
+    .nav-tabs .nav-link:not(.active):hover {
+        color: #0096e0;
+    }
+
+    #labTabsContent {
+        padding: 5px 0 0 0;
+    }
+
+    /* Sub-Tabs for Test Request Section */
+    #testRequestSubTabs .nav-link {
+        background-color: transparent;
+        border: none;
+        padding-bottom: 14px;
+        margin: 0 12px;
+        padding-left: 0;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    #testRequestSubTabs .tab-label {
+        color: #000;
+        font-weight: 500;
+        padding: 5px 10px;
+        border-radius: 7px;
+        /* transition: all 0.2s ease; */
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    #testRequestSubTabs .nav-link.active .tab-label {
+        background-color: #0096e0;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    /* #testRequestSubTabs {
+        gap: 8px;
+    } */
 </style>
 
 <body>
@@ -101,87 +172,113 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div>
-                                    <h6 class="mb-3">All Project under testing</h6>
-                                </div>
-                                <div class="card mb-3">
+
+                                <div class="card mb-3 mt-4">
                                     <div class="card-body">
-                                        <div class="row">
-
-                                            <!-- Datepicker -->
-                                            <div class="col-md-3 mb-2">
-                                                <label class="form-label">Date</label>
-                                                <input type="date" class="form-control" placeholder="DD/MM/YY">
-                                            </div>
-
-                                            <!-- Month List -->
-                                            <div class="col-md-3 mb-2">
-                                                <label class="form-label">Month</label>
-                                                <select class="form-select">
-                                                    <option value="">Select Month</option>
-                                                    @foreach ([
-                                                        '01' => 'January',
-                                                        '02' => 'February',
-                                                        '03' => 'March',
-                                                        '04' => 'April',
-                                                        '05' => 'May',
-                                                        '06' => 'June',
-                                                        '07' => 'July',
-                                                        '08' => 'August',
-                                                        '09' => 'September',
-                                                        '10' => 'October',
-                                                        '11' => 'November',
-                                                        '12' => 'December',
-                                                    ] as $key => $month)
-                                                        <option value="{{ $key }}">{{ $month }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <!-- Year List -->
-                                            <div class="col-md-3 mb-2">
-                                                <label class="form-label">Year</label>
-                                                <select class="form-select">
-                                                    <option value="">Select Year</option>
-                                                    @for ($year = date('Y'); $year >= 2000; $year--)
-                                                        <option value="{{ $year }}">{{ $year }}</option>
-                                                    @endfor
-                                                </select>
-                                            </div>
-
-                                            <!-- Search Button -->
-                                            <div class="col-md-3 d-flex align-items-end mb-2">
-                                                <button type="button" class="btn btn-primary w-100">
-                                                    <i class="ti ti-search me-1"></i> Search
+                                        <!-- Nav tabs (main) -->
+                                        <ul class="nav nav-tabs mb-3" id="labTabs" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link active" id="calendar-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#calendar" type="button" role="tab"
+                                                    aria-controls="calendar" aria-selected="true">
+                                                    Calendar lab Booking EMC Chamber Room
                                                 </button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="request-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#request" type="button" role="tab"
+                                                    aria-controls="request" aria-selected="false">
+                                                    Test Request
+                                                </button>
+                                            </li>
+                                        </ul>
+
+                                        <!-- Tab content -->
+                                        <div class="tab-content" id="labTabsContent">
+                                            <!-- Calendar Tab -->
+                                            <div class="tab-pane fade show active" id="calendar" role="tabpanel"
+                                                aria-labelledby="calendar-tab">
+
+                                                {{-- Filter: Month & Year --}}
+                                                <div id="calendarFilter" class="row g-3 mb-3 align-items-end">
+                                                    <!-- Month Select -->
+                                                    <div class="col-3">
+                                                        <label for="selectMonth" class="form-label">Month</label>
+                                                        <select id="selectMonth" class="form-select">
+                                                            <option value="1">January</option>
+                                                            <option value="2">February</option>
+                                                            <option value="3">March</option>
+                                                            <option value="4">April</option>
+                                                            <option value="5">May</option>
+                                                            <option value="6">June</option>
+                                                            <option value="7">July</option>
+                                                            <option value="8">August</option>
+                                                            <option value="9">September</option>
+                                                            <option value="10">October</option>
+                                                            <option value="11">November</option>
+                                                            <option value="12">December</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <!-- Year Select -->
+                                                    <div class="col-3">
+                                                        <label for="selectYear" class="form-label">Year</label>
+                                                        <select id="selectYear" class="form-select">
+                                                            @for ($year = now()->year; $year >= 2020; $year--)
+                                                                <option value="{{ $year }}">{{ $year }}
+                                                                </option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div id="calendarFull" style="min-height: 600px;"></div>
                                             </div>
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-bordered custom-table">
-                                                <thead class="table-light">
-                                                    <tr class="text-center align-middle">
-                                                        <th>Item</th>
-                                                        <th>Order job No.</th>
-                                                        <th>Project Name</th>
-                                                        <th>Priority</th>
-                                                        <th>Request by</th>
-                                                        <th>Test Schedule</th>
-                                                        <th>Complete</th>
-                                                        <th>Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td colspan="10" class="text-center">No data available</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                            <!-- Test Request Tab -->
+                                            <div class="tab-pane fade" id="request" role="tabpanel"
+                                                aria-labelledby="request-tab">
+                                                <!-- Sub-tabs for Test Request -->
+                                                <ul class="nav nav-tabs mb-3" id="testRequestSubTabs" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="list-tab"
+                                                            data-bs-toggle="tab" data-bs-target="#list" type="button"
+                                                            role="tab" aria-controls="list" aria-selected="true">
+                                                            <span class="tab-label">List</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="schedule-tab"
+                                                            data-bs-toggle="tab" data-bs-target="#schedule"
+                                                            type="button" role="tab" aria-controls="schedule"
+                                                            aria-selected="false">
+                                                            <span class="tab-label">Schedule</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="all-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#all" type="button" role="tab"
+                                                            aria-controls="all" aria-selected="false">
+                                                            <span class="tab-label">All</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+
+                                                <!-- Sub-tab Content -->
+                                                <div class="tab-content" id="testRequestSubTabContent">
+                                                    <div class="tab-pane fade show active" id="list"
+                                                        role="tabpanel" aria-labelledby="list-tab">
+                                                        <p>List content here</p>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="schedule" role="tabpanel"
+                                                        aria-labelledby="schedule-tab">
+                                                        <p>Schedule content here</p>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="all" role="tabpanel"
+                                                        aria-labelledby="all-tab">
+                                                        <p>All content here</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -207,165 +304,10 @@
         <!-- Drag Target Area To SlideIn Menu On Small Screens -->
         <div class="drag-target"></div>
     </div>
-    <!--add service  Modal -->
-    <div class="modal fade modalHeadDecor" id="addserviceModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content rounded-0">
-                <div class="modal-header rounded-0">
-                    <h5 class="modal-title" id="exampleModalLabel1">&nbsp;เพิ่มพนักงาน</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="insert_user" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="row g-3 p-4">
-                            <div class="col-sm-6">
-                                <label for="" class="form-label">สาขา</label><span class="text-danger">
-                                    *</span><br>
-                                <input class="form-check-input" type="radio" name="ref_branch_id" id="inlineRadio1"
-                                    value="1" checked>
-                                <label class="form-check-label me-4" for="inlineRadio1">อ่อนนุช</label>
-                                <input class="form-check-input" type="radio" name="ref_branch_id" id="inlineRadio2"
-                                    value="2">
-                                <label class="form-check-label" for="inlineRadio2">ทองหล่อ</label>
-                            </div>
-                            <div class="col-sm-12"></div>
-                            <div class="col-sm-6">
-                                <label for="" class="form-label">บัตรพนักงาน</label><span class="text-danger">
-                                    *</span>
-                                <input name="user_code" type="password" class="form-control"
-                                    placeholder="บัตรพนักงาน" id="user_code" required />
-                            </div>
-                            <div class="col-sm-6">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="" class="form-label">ชื่อพนักงาน</label><span
-                                    class="text-danger"> *</span>
-                                <input name="name" type="text" class="form-control" placeholder="ชื่อพนักงาน"
-                                    required />
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="" class="form-label">ชื่อเล่น</label><span class="text-danger">
-                                    *</span>
-                                <input name="nickname" type="text" class="form-control" placeholder="ชื่อเล่น"
-                                    required />
-                            </div>
-                            {{-- <div class="col-sm-6">
-                                <label for="" class="form-label">ตำแหน่ง</label>
-                                <select name="ref_position_id" id="select2Position1"
-                                    class="select2 form-select form-select-lg" data-allow-clear="true">
-                                    @foreach ($position as $pos)
-                                        <option value="{{ $pos->id }}">{{ $pos->position_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
-                            <div class="col-sm-10 mt-3">
-                                <label for="paymentReceipt">รูปภาพ</label>
-                                <input type="file" name="image_name" class="form-control mb-2"
-                                    id="paymentReceipt">
-                                <div class="preview-container">
-                                    <img id="preview1" src="" alt="Preview 1"
-                                        style="display: none; width:30%">
-                                </div>
-                            </div>
-
-                            <div class="col-span-12">
-                                <div class="col-sm-6 mt-3">
-                                    <label for="" class="form-label">ชื่อผู้ใช้</label><span
-                                        class="text-danger"> *</span>
-                                    <input name="email" type="text" class="form-control"
-                                        placeholder="ชื่อผู้ใช้" required />
-                                </div>
-                                <div class="col-sm-6 mt-3">
-                                    <label for="update-profile-form-2" class="form-label">รหัสผ่าน</label><span
-                                        class="text-danger"> *</span>
-                                    <input name="password" id="password" type="password" class="form-control"
-                                        placeholder="รหัสผ่าน">
-                                </div>
-                                <div class="col-sm-6 mt-3">
-                                    <label for="update-profile-form-3" class="form-label">ยืนยัน รหัสผ่าน</label><span
-                                        class="text-danger"> *</span>
-                                    <input id="confirm_password" type="password" class="form-control"
-                                        placeholder="ยืนยัน รหัสผ่าน">
-                                </div>
-                            </div>
-                            <script>
-                                //// ทำ input เงินเดือน เริ่ม
-                                function formatSalary() {
-                                    const input = document.getElementById('salary');
-                                    let value = input.value.replace(/,/g, ''); // ลบเครื่องหมายจุลภาค
-                                    if (!isNaN(value) && value !== '') {
-                                        input.value = Number(value).toLocaleString(); // แปลงเป็นรูปแบบ number_format
-                                    } else {
-                                        input.value = ''; // ถ้าไม่ใช่ตัวเลขให้ลบค่าที่ป้อน
-                                    }
-                                }
-                                //// ทำ input เงินเดือน จบ
-
-                                //// ทำ เช็ค Password เริ่ม
-                                var password = document.getElementById("password"),
-                                    confirm_password = document.getElementById("confirm_password");
-
-                                function validatePassword() {
-                                    if (password.value != confirm_password.value) {
-                                        confirm_password.setCustomValidity("Passwords Don't Match");
-                                    } else {
-                                        confirm_password.setCustomValidity('');
-                                    }
-                                }
-
-                                password.onchange = validatePassword;
-                                confirm_password.onkeyup = validatePassword;
-                                //// ทำ เช็ค Password จบ
-                                function handleFileInput(fileInputId, previewId) {
-                                    const fileInput = document.getElementById(fileInputId);
-                                    const previewImage = document.getElementById(previewId);
-
-                                    fileInput.addEventListener('change', function() {
-                                        const file = fileInput.files[0];
-
-                                        if (file) {
-                                            const reader = new FileReader();
-
-                                            reader.onload = function(e) {
-                                                previewImage.src = e.target.result;
-                                                previewImage.style.display = 'block'; // แสดงภาพพรีวิว
-                                            };
-
-                                            reader.readAsDataURL(file);
-                                        } else {
-                                            previewImage.style.display = 'none'; // ซ่อนพรีวิวถ้าไม่ได้เลือกไฟล์
-                                        }
-                                    });
-                                }
-
-                                handleFileInput('paymentReceipt', 'preview1');
-                            </script>
-                            <div class="col-sm-12">
-                                <label for="" class="form-label">หมายเหตุ</label>
-                                <textarea name="remark" class="form-control"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer rounded-0 justify-content-center">
-                        <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">ปิด</button>
-                        <button type="submit" class="btn btn-main">บันทึก</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade modalHeadDecor" id="insurance" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document" id="view">
-
-        </div>
-    </div>
-
-    <!--set rent Modal -->
 
     <!-- / Layout wrapper -->
     @include('admin/layout/inc_js')
-    
+    <script src="{{ asset('dist/js/app.js') }}"></script>
 </body>
 
 </html>

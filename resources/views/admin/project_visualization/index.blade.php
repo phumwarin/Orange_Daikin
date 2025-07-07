@@ -161,28 +161,6 @@
                                 </div>
                                 <div class="card mb-3">
                                     <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-bordered custom-table">
-                                                <thead class="table-light">
-                                                    <tr class="text-center align-middle">
-                                                        <th>Item</th>
-                                                        <th>Order job No.</th>
-                                                        <th>Project Name</th>
-                                                        <th>Priority</th>
-                                                        <th>Request by</th>
-                                                        <th>Test Schedule</th>
-                                                        <th>Complete</th>
-                                                        <th>Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td colspan="10" class="text-center">No data available</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
