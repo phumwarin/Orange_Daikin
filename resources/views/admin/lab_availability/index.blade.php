@@ -138,6 +138,11 @@
     } */
 </style>
 
+@php
+    $currentMonth = now()->month;
+    $currentYear = now()->year;
+@endphp
+
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -179,8 +184,8 @@
                                         <ul class="nav nav-tabs mb-3" id="labTabs" role="tablist">
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link active" id="calendar-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#calendar" type="button" role="tab"
-                                                    aria-controls="calendar" aria-selected="true">
+                                                    data-bs-target="#calendar-tab-pane" type="button" role="tab"
+                                                    aria-controls="calendar-tab-pane" aria-selected="true">
                                                     Calendar lab Booking EMC Chamber Room
                                                 </button>
                                             </li>
@@ -195,43 +200,40 @@
 
                                         <!-- Tab content -->
                                         <div class="tab-content" id="labTabsContent">
-                                            <!-- Calendar Tab -->
-                                            <div class="tab-pane fade show active" id="calendar" role="tabpanel"
-                                                aria-labelledby="calendar-tab">
+                                            <!--  Calendar Tab -->
+                                            <div class="tab-pane fade show active" id="calendar-tab-pane"
+                                                role="tabpanel" aria-labelledby="calendar-tab">
 
                                                 {{-- Filter: Month & Year --}}
                                                 <div id="calendarFilter" class="row g-3 mb-3 align-items-end">
                                                     <!-- Month Select -->
-                                                    <div class="col-3">
+                                                    <div class="col-3 mb-3">
                                                         <label for="selectMonth" class="form-label">Month</label>
                                                         <select id="selectMonth" class="form-select">
-                                                            <option value="1">January</option>
-                                                            <option value="2">February</option>
-                                                            <option value="3">March</option>
-                                                            <option value="4">April</option>
-                                                            <option value="5">May</option>
-                                                            <option value="6">June</option>
-                                                            <option value="7">July</option>
-                                                            <option value="8">August</option>
-                                                            <option value="9">September</option>
-                                                            <option value="10">October</option>
-                                                            <option value="11">November</option>
-                                                            <option value="12">December</option>
+                                                            @for ($m = 1; $m <= 12; $m++)
+                                                                <option value="{{ $m }}"
+                                                                    {{ $m == $currentMonth ? 'selected' : '' }}>
+                                                                    {{ \Carbon\Carbon::create()->month($m)->format('F') }}
+                                                                </option>
+                                                            @endfor
                                                         </select>
                                                     </div>
 
                                                     <!-- Year Select -->
-                                                    <div class="col-3">
+                                                    <div class="col-3 mb-3">
                                                         <label for="selectYear" class="form-label">Year</label>
                                                         <select id="selectYear" class="form-select">
                                                             @for ($year = now()->year; $year >= 2020; $year--)
-                                                                <option value="{{ $year }}">{{ $year }}
+                                                                <option value="{{ $year }}"
+                                                                    {{ $year == $currentYear ? 'selected' : '' }}>
+                                                                    {{ $year }}
                                                                 </option>
                                                             @endfor
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div id="calendarFull" style="min-height: 600px;"></div>
+                                                <!-- FullCalendar -->
+                                                <div id="calendar"></div>
                                             </div>
 
                                             <!-- Test Request Tab -->
@@ -247,10 +249,9 @@
                                                         </button>
                                                     </li>
                                                     <li class="nav-item" role="presentation">
-                                                        <button class="nav-link" id="schedule-tab"
-                                                            data-bs-toggle="tab" data-bs-target="#schedule"
-                                                            type="button" role="tab" aria-controls="schedule"
-                                                            aria-selected="false">
+                                                        <button class="nav-link" id="schedule-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#schedule" type="button" role="tab"
+                                                            aria-controls="schedule" aria-selected="false">
                                                             <span class="tab-label">Schedule</span>
                                                         </button>
                                                     </li>
@@ -264,18 +265,67 @@
                                                 </ul>
 
                                                 <!-- Sub-tab Content -->
-                                                <div class="tab-content" id="testRequestSubTabContent">
+                                                <div class="tab-content px-0" id="testRequestSubTabContent">
                                                     <div class="tab-pane fade show active" id="list"
                                                         role="tabpanel" aria-labelledby="list-tab">
-                                                        <p>List content here</p>
+                                                        <div class="table-responsive">
+                                                            <table
+                                                                class="table table-hover table-bordered custom-table">
+                                                                <thead class="table-light">
+                                                                    <tr class="text-center align-middle">
+                                                                        <th>Project</th>
+                                                                        <th>Purpose</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td colspan="10" class="text-center">No data
+                                                                            available</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="schedule" role="tabpanel"
                                                         aria-labelledby="schedule-tab">
-                                                        <p>Schedule content here</p>
+                                                        <div class="table-responsive">
+                                                            <table
+                                                                class="table table-hover table-bordered custom-table">
+                                                                <thead class="table-light">
+                                                                    <tr class="text-center align-middle">
+                                                                        <th>Test date request</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td colspan="10" class="text-center">No data
+                                                                            available</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="all" role="tabpanel"
                                                         aria-labelledby="all-tab">
-                                                        <p>All content here</p>
+                                                        <div class="table-responsive">
+                                                            <table
+                                                                class="table table-hover table-bordered custom-table">
+                                                                <thead class="table-light">
+                                                                    <tr class="text-center align-middle">
+                                                                        <th>Project</th>
+                                                                        <th>Purpose</th>
+                                                                        <th>Request from</th>
+                                                                        <th>Test date request</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td colspan="10" class="text-center">No data
+                                                                            available</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
