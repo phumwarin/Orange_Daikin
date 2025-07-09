@@ -35,7 +35,7 @@
                             <div class="col-sm-12">
                                 <div class="card mb-3">
                                     <div class="card-header d-flex justify-content-between container-create-job">
-                                        <h6 class="mb-0">Create a new job</h6> <!-- 🔹 Removed .job-text class -->
+                                        <h6 class="mb-0 job-text">Create a new job</h6>
                                         <div>
                                             <button class="btn btn-primary" type="button">
                                                 <span><i class="fa-regular fa-floppy-disk me-2"></i>Save</span>
@@ -70,7 +70,6 @@
         <!-- Overlay -->
         <div class="layout-overlay layout-menu-toggle"></div>
 
-        <!-- 🔹 Removed .drag-target as it's likely unused -->
     </div>
     <!-- / Layout wrapper -->
 

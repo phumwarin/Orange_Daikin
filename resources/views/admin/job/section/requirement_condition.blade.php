@@ -8,43 +8,6 @@
     <title>Job | Daikin</title>
 </head>
 <style>
-    .table th {
-        text-transform: none;
-        font-size: 13px;
-        color: #fff !important;
-        background-color: #0096e0;
-    }
-
-    .table td {
-        padding-top: 14px;
-        padding-bottom: 14px;
-    }
-
-    .custom-table {
-        border-collapse: collapse;
-        border: 1px solid #dee2e6;
-    }
-
-    .custom-table th,
-    .custom-table td {
-        border-left: none;
-        border-right: none;
-        border-top: 1px solid #dee2e6;
-        border-bottom: 1px solid #dee2e6;
-    }
-
-    .custom-table tr {
-        border-left: 1px solid #dee2e6;
-        border-right: 1px solid #dee2e6;
-    }
-
-    .container-create-job {
-        padding: 16px 24px;
-    }
-
-    .job-text {
-        align-self: center;
-    }
 
     .text-checkbox {
         font-size: 13px;
@@ -58,7 +21,7 @@
     }
 
     .form-label {
-        font-weight: 610;
+        font-weight: 450;
     }
 
     .form-select {

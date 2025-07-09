@@ -29,6 +29,7 @@ use App\Http\Controllers\ExportExcelController;
 use App\Http\Controllers\AnnualHolidayController;
 use App\Http\Controllers\ColorSchemeController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\IsoDocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +85,10 @@ Route::get('/admin/test-equipment', function () {
 // End Menu Sidebar Route //
 
 Route::get('/admin/job/create', [JobController::class, 'create'])->name('job.create');
+
+Route::get('/admin/iso-documents/manage/{key}', [IsoDocumentController::class, 'manage'])->name('iso-documents.manage');
+
+
 
 Route::controller(FrontHomeController::class)->group(function () {
     Route::get('calculate-all', 'calculate_all')->name('calculate-all');
@@ -264,7 +269,6 @@ Route::prefix('admin')->group(function () {
             Route::post('user-setting/work_shift', 'work_shifts')->name('user-setting.work_shifts');
             Route::get('user-setting-page', 'index')->name('user-setting');
         });
-
     });
 });
 /////////////// Ajax ////////////////

@@ -19,7 +19,7 @@
     }
 
     .form-label {
-        font-weight: 610;
+        font-weight: 450;
     }
 </style>
 

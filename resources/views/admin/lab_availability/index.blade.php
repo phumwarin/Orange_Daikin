@@ -6,137 +6,10 @@
 <head>
     @include('admin/layout/inc_header')
     <title>Lab Availability | Daikin</title>
+
+    {{-- Load styles from: public\css\lab-availability-index.css --}}
+    <link rel="stylesheet" href="{{ asset('css/lab-availability-index.css') }}">
 </head>
-<style>
-    /* Table Styling */
-    .table th {
-        text-transform: none;
-        font-size: 13px;
-        color: #fff !important;
-        background-color: #0096e0;
-    }
-
-    .table td {
-        padding-top: 14px;
-        padding-bottom: 14px;
-    }
-
-    .custom-table {
-        border-collapse: collapse;
-        border: 1px solid #dee2e6;
-    }
-
-    .custom-table th,
-    .custom-table td {
-        border-left: none;
-        border-right: none;
-        border-top: 1px solid #dee2e6;
-        border-bottom: 1px solid #dee2e6;
-    }
-
-    .custom-table tr {
-        border-left: 1px solid #dee2e6;
-        border-right: 1px solid #dee2e6;
-    }
-
-    /* Modal Header Decoration */
-    .modalHeadDecor .modal-header {
-        padding: 0;
-    }
-
-    .modalHeadDecor .modal-title {
-        padding: 1.25rem 1.5rem 1.25rem;
-        color: white;
-        background-color: #54BAB9;
-        position: relative;
-    }
-
-    .modalHeadDecor .modal-title::after {
-        position: absolute;
-        top: 0;
-        right: -65px;
-        content: '';
-        width: 0;
-        height: 0;
-        border-top: 65px solid #54BAB9;
-        border-right: 65px solid transparent;
-    }
-
-    /* Job Card Layout */
-    .container-create-job {
-        padding: 16px 24px;
-    }
-
-    .job-text {
-        align-self: center;
-    }
-
-    /* Main Nav Tabs Styling (Card Level) */
-    .card .nav.nav-tabs {
-        padding: 0 14px;
-    }
-
-    .nav-tabs .nav-link.active {
-        position: relative;
-        color: #0096e0 !important;
-    }
-
-    .nav-tabs .nav-link.active::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background-color: #0096e0;
-    }
-
-    .nav-tabs .nav-link {
-        color: #0096e0;
-        transition: color 0.3s ease;
-        padding-bottom: 14px;
-    }
-
-    .nav-tabs .nav-link:not(.active):hover {
-        color: #0096e0;
-    }
-
-    #labTabsContent {
-        padding: 5px 0 0 0;
-    }
-
-    /* Sub-Tabs for Test Request Section */
-    #testRequestSubTabs .nav-link {
-        background-color: transparent;
-        border: none;
-        padding-bottom: 14px;
-        margin: 0 12px;
-        padding-left: 0;
-        padding-right: 0;
-        text-align: center;
-    }
-
-    #testRequestSubTabs .tab-label {
-        color: #000;
-        font-weight: 500;
-        padding: 5px 10px;
-        border-radius: 7px;
-        /* transition: all 0.2s ease; */
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
-
-    #testRequestSubTabs .nav-link.active .tab-label {
-        background-color: #0096e0;
-        color: #fff;
-        font-weight: 600;
-    }
-
-    /* #testRequestSubTabs {
-        gap: 8px;
-    } */
-</style>
 
 @php
     $currentMonth = now()->month;
@@ -167,8 +40,8 @@
                         <div class="row ">
                             <div class="col-sm-12">
                                 <div class="card mb-3">
-                                    <div class="card-header d-flex justify-content-between container-create-job">
-                                        <h6 class="mb-0 job-text">Chamber</h6>
+                                    <div class="card-header d-flex justify-content-between container-chamber">
+                                        <h6 class="mb-0 chamber-text">Chamber</h6>
                                         <button class="btn btn-primary buttons-collection waves-effect waves-light"
                                             tabindex="0" aria-controls="DataTables_Table_0" type="button"
                                             aria-haspopup="dialog" aria-expanded="false" data-bs-toggle="modal"

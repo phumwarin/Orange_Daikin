@@ -5,47 +5,10 @@
 <head>
     @include('admin/layout/inc_header')
     <title>Job | Daikin</title>
+
+    {{-- Load styles from: public\css\job-index.css --}}
+    <link rel="stylesheet" href="{{ asset('css/add-indoor.css') }}">
 </head>
-
-<style>
-    .table th {
-        text-transform: none;
-        font-size: 13px;
-        color: #fff !important;
-        background-color: #0096e0;
-    }
-
-    .table td {
-        padding-top: 14px;
-        padding-bottom: 14px;
-    }
-
-    .custom-table {
-        border-collapse: collapse;
-        border: 1px solid #dee2e6;
-    }
-
-    .custom-table th,
-    .custom-table td {
-        border-left: none;
-        border-right: none;
-        border-top: 1px solid #dee2e6;
-        border-bottom: 1px solid #dee2e6;
-    }
-
-    .custom-table tr {
-        border-left: 1px solid #dee2e6;
-        border-right: 1px solid #dee2e6;
-    }
-
-    .form-label {
-        font-weight: 610;
-    }
-
-    .modal-content {
-        border-radius: 20px !important;
-    }
-</style>
 
 <body>
     <div class="d-flex justify-content-end mb-4">
@@ -82,11 +45,11 @@
     <!-- Modal -->
     <div class="modal fade" id="addIndoor" tabindex="-1" aria-labelledby="addIndoorLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content rounded-4">
+            <div class="modal-content">
                 <div class="modal-header border-bottom-0 pb-0">
-                    <div class="d-flex justify-content-between align-items-start w-100">
+                    <div class="d-flex justify-content-between align-items-start w-100 mb-4 mt-2">
                         <div>
-                            <h5 class="modal-title fw-bold mb-4 mt-2" id="addIndoorLabel">INDOOR UNIT</h5>
+                            <h5 class="modal-title fw-bold" id="addIndoorLabel">INDOOR UNIT</h5>
                         </div>
                         <button type="button" class="position-absolute top-0 end-0 mt-3 me-3 border-0 bg-transparent"
                             data-bs-dismiss="modal" aria-label="Close">
@@ -146,7 +109,7 @@
     <div class="modal fade" id="addSeriesModelModal" tabindex="-1" aria-labelledby="addSeriesModelLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-4">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title fw-bold" id="addSeriesModelLabel">Add Series Model</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

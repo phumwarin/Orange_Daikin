@@ -6,53 +6,10 @@
 <head>
     @include('admin/layout/inc_header')
     <title>Job | Daikin</title>
+
+    {{-- Load styles from: public\css\job-index.css --}}
+    <link rel="stylesheet" href="{{ asset('css/job-index.css') }}">
 </head>
-<style>
-    .table th {
-        text-transform: none;
-        font-size: 13px;
-        color: #fff !important;
-        background-color: #0096e0;
-    }
-
-    .table td {
-        padding-top: 14px;
-        padding-bottom: 14px;
-    }
-
-    .custom-table {
-        border-collapse: collapse;
-        border: 1px solid #dee2e6;
-    }
-
-    .custom-table th,
-    .custom-table td {
-        border-left: none;
-        border-right: none;
-        border-top: 1px solid #dee2e6;
-        border-bottom: 1px solid #dee2e6;
-    }
-    .custom-table tr {
-        border-left: 1px solid #dee2e6;
-        border-right: 1px solid #dee2e6;
-    }
-
-    .container-create-job {
-        padding: 16px 24px;
-    }
-
-    .job-text {
-        align-self: center;
-    }
-
-    .form-label {
-        font-weight: 610;
-    }
-
-    .form-select {
-        font-size: 13px;
-    }
-</style>
 
 <body>
     <!-- Layout wrapper -->
@@ -78,9 +35,10 @@
                         <div class="row ">
                             <div class="col-sm-12">
                                 <div class="card mb-3">
-                                    <div class="card-header d-flex justify-content-between container-create-job">
+                                    <div class="card-header d-flex justify-content-between">
                                         <h6 class="mb-0 job-text">Job</h6>
-                                        <a href="{{ url('admin/job/create') }}" class="btn btn-primary">
+                                        <a href="{{ url('admin/job/create') }}"
+                                            class="btn btn-primary buttons-collection waves-effect waves-light">
                                             <i class="ti ti-plus me-1"></i> Create a new job
                                         </a>
                                     </div>
@@ -91,56 +49,63 @@
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <div class="row">
-
                                             <!-- Datepicker -->
-                                            <div class="col-md-3 mb-2">
-                                                <label class="form-label">Date</label>
-                                                <input type="date" class="form-control" placeholder="DD/MM/YY">
+                                            <div class="col-md-3 mb-2 d-flex align-items-end">
+                                                <div class="w-100">
+                                                    <label class="form-label">Date</label>
+                                                    <input type="date" class="form-control" placeholder="DD/MM/YY">
+                                                </div>
                                             </div>
 
                                             <!-- Month List -->
-                                            <div class="col-md-3 mb-2">
-                                                <label class="form-label">Month</label>
-                                                <select class="form-select">
-                                                    <option value="">Select Month</option>
-                                                    @foreach ([
-                                                        '01' => 'January',
-                                                        '02' => 'February',
-                                                        '03' => 'March',
-                                                        '04' => 'April',
-                                                        '05' => 'May',
-                                                        '06' => 'June',
-                                                        '07' => 'July',
-                                                        '08' => 'August',
-                                                        '09' => 'September',
-                                                        '10' => 'October',
-                                                        '11' => 'November',
-                                                        '12' => 'December',
-                                                    ] as $key => $month)
-                                                        <option value="{{ $key }}">{{ $month }}</option>
-                                                    @endforeach
-                                                </select>
+                                            <div class="col-md-3 mb-2 d-flex align-items-end">
+                                                <div class="w-100">
+                                                    <label class="form-label">Month</label>
+                                                    <select class="form-select">
+                                                        <option value="">Select Month</option>
+                                                        @foreach ([
+                                                            '01' => 'January',
+                                                            '02' => 'February',
+                                                            '03' => 'March',
+                                                            '04' => 'April',
+                                                            '05' => 'May',
+                                                            '06' => 'June',
+                                                            '07' => 'July',
+                                                            '08' => 'August',
+                                                            '09' => 'September',
+                                                            '10' => 'October',
+                                                            '11' => 'November',
+                                                            '12' => 'December',
+                                                        ] as $key => $month)
+                                                            <option value="{{ $key }}">{{ $month }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
 
                                             <!-- Year List -->
-                                            <div class="col-md-3 mb-2">
-                                                <label class="form-label">Year</label>
-                                                <select class="form-select">
-                                                    <option value="">Select Year</option>
-                                                    @for ($year = date('Y'); $year >= 2000; $year--)
-                                                        <option value="{{ $year }}">{{ $year }}</option>
-                                                    @endfor
-                                                </select>
+                                            <div class="col-md-3 mb-2 d-flex align-items-end">
+                                                <div class="w-100">
+                                                    <label class="form-label">Year</label>
+                                                    <select class="form-select">
+                                                        <option value="">Select Year</option>
+                                                        @for ($year = date('Y'); $year >= 2000; $year--)
+                                                            <option value="{{ $year }}">{{ $year }}
+                                                            </option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
                                             </div>
 
                                             <!-- Search Button -->
-                                            <div class="col-md-3 d-flex align-items-end mb-2">
+                                            <div class="col-md-3 mb-2 d-flex align-items-end">
                                                 <button type="button" class="btn btn-primary w-100">
                                                     <i class="ti ti-search me-1"></i> Search
                                                 </button>
                                             </div>
-
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="card mb-3">
